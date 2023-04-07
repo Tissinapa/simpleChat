@@ -1,5 +1,5 @@
 const net = require("net")
-
+const host = "127.0.0.1"
 const port = "8124"
 
 let sockets = []
@@ -7,14 +7,13 @@ let sockets = []
 const server = net.createServer(socket =>{
 
     sockets.push(socket)
-    console.log("client connected")
-    
     socket.on("data", data =>{
         broadcast(data,socket)
     })
 
     socket.on("error", (err) => {
-        throw err
+        console.log("Error ")
+        console.log(err)
     })
 
     socket.on("end", (err) => {
@@ -22,19 +21,18 @@ const server = net.createServer(socket =>{
     })
     
 })
+server.listen(port,host, () => console.log("Server opened at Host: " + host + " Port: " + port ))
 
-server.listen(port, () =>{
-    console.log("server bound")
-})
 function broadcast(message, socketSent){
 
     if (message.toString()==="quit"){
         const index = sockets.indexOf(socketSent)
-        
         sockets.splice(index,1)
-    } else {
+    
+    }else {
         sockets.forEach(socket => {
             if(socket !== socketSent){
+                
                 socket.write(message)
             }
             
