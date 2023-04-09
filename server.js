@@ -1,10 +1,12 @@
+// general guindece from https://www.youtube.com/watch?v=-rVxORKWzv0
+// I used book to gain some knowledge about node.js sockets
+// Peltomäki, J., 2020. Node.js web-palveluiden ohjelmointi
 const net = require("net")
 const host = "127.0.0.1"
 const port = "8124"
 
 let sockets = []
 let sockets2 = []
-
 
 const server = net.createServer(socket =>{
 
