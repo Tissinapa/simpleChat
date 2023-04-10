@@ -55,7 +55,7 @@ function broadcast(message, socketSent){
 
         })
 
-    }else if(message.toString() ==="quit"){
+    }else if(message.toString() === "quit"){
         const index = sockets.indexOf(socketSent)
         sockets.splice(index,1)
     
